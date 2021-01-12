@@ -9,7 +9,9 @@ module.exports.get_all_patient = (req, res)=>{
             console.log(err)
             res.json(false)
         }
-        else res.json(response)
+        else{
+            res.json(response)
+        }
     })
 }
 

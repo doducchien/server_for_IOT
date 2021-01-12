@@ -8,7 +8,7 @@ const device_controller = require('../controllers/device.controller')
 //middleware
 device_router.use((req, res, next)=>{
     var body = req.body;
-    console.log(body)
+    // console.log(body)
     if(body){
         if(body.role === 'doctor'){
             next();
@@ -33,5 +33,12 @@ device_router.route('/getall')
 
 device_router.route('/add_patient')
 .put(device_controller.add_patient)
+
+device_router.route('/turn_on_led')
+.post(device_controller.turn_on_led)
+
+device_router.route('/turn_off_led')
+.post(device_controller.turn_off_led)
+
 
 module.exports = device_router
