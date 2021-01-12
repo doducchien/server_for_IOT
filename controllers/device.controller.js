@@ -73,7 +73,6 @@ module.exports.turn_on_led = (req, res)=>{
 
 module.exports.turn_off_led = (req, res)=>{
     var body = req.body;
-    console.log(body.room)
 
     var sql =  'SELECT id_device FROM device WHERE patient=?';
     db.query(sql, [body.room], (err, response)=>{
