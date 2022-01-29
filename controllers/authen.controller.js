@@ -25,8 +25,11 @@ module.exports.login_doctor = (req, res)=>{
     var body = req.body;
     var phone_number =body.phone_number;
     var password = md5(body.password + body.phone_number);
+    console.log(password)
     var sql = 'SELECT * FROM doctor_acount WHERE phone_number=? AND password=?';
+    console.log(phone_number, password)
     db.query(sql, [phone_number, password], (err, response)=>{
+        console.log(err)
         if(err) res.json(false);
         else{
             if(response[0]){

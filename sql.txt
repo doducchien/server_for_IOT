@@ -1,0 +1,48 @@
+-- create database group2
+use group2;
+CREATE table  IF NOT EXISTS `group2`.`data`(
+	phone_number char(20),
+    link_to_local char(150)
+);
+
+create table if not exists `group2`.`device`(
+	id_device char(12),
+    name_device varchar(100),
+    patient char(10)
+);
+
+create table if not exists `group2`.`patient_account`(
+	phone_number char(10),
+    cmnd_number varchar(12),
+    full_name varchar(100),
+    age INT,
+    doctor_manager char(12)
+);
+
+create table if not exists `group2`.`doctor_account`(
+	phone_number char(10),
+    cmnd_number varchar(12),
+    full_name varchar(100),
+    age INT,
+    id_doctor char(12),
+    password char(32)
+);
+
+ALTER TABLE `group2`.`doctor_account` ADD PRIMARY KEY(cmnd_number);
+ALTER TABLE `group2`. `patient_account` ADD PRIMARY KEY(phone_number);
+ALTER TABLE `group2`.`device` ADD PRIMARY KEY(id_device);
+
+ALTER TABLE `group2`.`patient_account` ADD FOREIGN KEY (doctor_manager) references doctor_account(cmnd_number);
+ALTER TABLE `group2`.`data` ADD FOREIGN KEY (phone_number) references patient_account(phone_number);
+ALTER TABLE `group2`.`device` ADD FOREIGN KEY (patient) references patient_account(phone_number);
+
+
+
+RENAME TABLE patient_account TO patient_acount;
+RENAME TABLE doctor_account TO doctor_acount;
+SET SQL_SAFE_UPDATES = 0;
+
+INSERT INTO doctor_acount(cmnd_number, full_name, id_doctor, age, phone_number, password)
+value('125875905', 'Do Duc Chien', '123123', 22, '0975577826', 'cd5aa8dd85a38ec71712bf48082514c2');
+-- delete from doctor_acount;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '22061999';
